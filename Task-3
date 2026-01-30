@@ -1,0 +1,55 @@
+import java.util.*;
+import java.util.stream.*;
+
+class Person {
+    String name;
+    int age;
+
+    Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+    public static boolean isOlderThanLimit(Person p, int limit) {
+        return p.age > limit;
+    }
+
+    public String getName() {
+        return name;
+    }
+}
+
+public class Task3 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt();
+        List<Person> persons = new ArrayList<>();
+
+        for (int i = 0; i < n; i++) {
+            String name = sc.next();
+            int age = sc.nextInt();
+            persons.add(new Person(name, age));
+        }
+
+        int ageLimit = sc.nextInt();
+
+        String sortedNames = persons.stream()
+                .map(Person::getName)
+                .sorted(String::compareTo)
+                .collect(Collectors.joining(" "));
+
+        String filteredNames = persons.stream()
+                .filter(p -> Person.isOlderThanLimit(p, ageLimit))
+                .map(Person::getName)
+                .collect(Collectors.joining(" "));
+
+        String upperNames = persons.stream()
+                .map(Person::getName)
+                .map(String::toUpperCase)
+                .collect(Collectors.joining(" "));
+
+        System.out.println(sortedNames);
+        System.out.println(filteredNames);
+        System.out.println(upperNames);
+    }
+}
