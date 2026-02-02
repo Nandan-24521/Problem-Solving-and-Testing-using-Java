@@ -2,11 +2,21 @@ import java.util.*;
 
 public class Task2 {
     public static void main(String[] args) {
-        int[] arr = {10, 20, 30, 40, 50};
-        int index = 2;
+        Scanner sc = new Scanner(System.in);
 
-        if (index >= 0 && index < arr.length)
-            System.out.println(arr[index]);
+        System.out.print("Enter size of array: ");
+        int n = sc.nextInt();
+
+        int[] arr = new int[n];
+        System.out.println("Enter elements:");
+        for (int i = 0; i < n; i++)
+            arr[i] = sc.nextInt();
+
+        System.out.print("Enter index: ");
+        int index = sc.nextInt();
+
+        if (index >= 0 && index < n)
+            System.out.println("Element = " + arr[index]);
         else
             System.out.println("Invalid index");
     }
