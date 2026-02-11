@@ -1,0 +1,58 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        int T = sc.nextInt();
+        sc.nextLine();
+        
+
+        for (int t = 0; t < T; t++) {
+            String s = sc.nextLine();
+            if (isLapindrome(s)) {
+                System.out.println("YES");
+            } else {
+                System.out.println("NO");
+            }
+        }
+        
+        sc.close();
+    }
+    
+    public static boolean isLapindrome(String s) {
+        int len = s.length();
+        
+        int halfLength = len / 2;
+        
+        String firstHalf = s.substring(0, halfLength);
+        String secondHalf;
+        
+        if (len % 2 == 0) {
+            secondHalf = s.substring(halfLength);
+        } else {
+            secondHalf = s.substring(halfLength + 1);
+        }
+        
+        int[] countFirst = new int[26];
+        int[] countSecond = new int[26];
+        
+        for (int i = 0; i < firstHalf.length(); i++) {
+            char c = firstHalf.charAt(i);
+            countFirst[c - 'a']++;
+        }
+        
+        for (int i = 0; i < secondHalf.length(); i++) {
+            char c = secondHalf.charAt(i);
+            countSecond[c - 'a']++;
+        }
+        
+        for (int i = 0; i < 26; i++) {
+            if (countFirst[i] != countSecond[i]) {
+                return false;
+            }
+        }
+        
+        return true;
+    }
+}
